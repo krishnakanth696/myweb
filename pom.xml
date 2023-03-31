@@ -30,11 +30,6 @@
 	</dependencies>
 	
 	<distributionManagement>
-		 <snapshotRepository>
-		    <id>nexusRepo</id>
-		    <url>http://18.181.78.2:8081/repository/myweb-snapshot/</url>
-		 </snapshotRepository>
-		
 		<repository>
 		    <id>nexusRepo</id>
 		    <url>http://13.114.44.49:8081/repository/myweb-release/</url>
