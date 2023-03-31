@@ -44,7 +44,7 @@ pipeline{
          }
         stage('Push Docker Image'){
              steps{
-                  withCredentials(credentialsId: 'krishnakanth696', variable: 'Docker_login')]) {
+                  withCredentials([string(credentialsId: 'krishnakanth696', variable: 'Docker_login')]) {
                       sh "docker login -u krishnakanth696 -p ${Docker_login}"
             }
             sh 'docker push krishnakanth696/dev'
