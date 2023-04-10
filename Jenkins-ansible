@@ -32,13 +32,13 @@ pipeline{
                   nexusUrl: '172.31.42.224:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
-                  repository: 'sample-releases', 
+                  repository: 'test-nexus', 
                   version: '8.2.0'  
               }
             }
         stage("Execute Ansible"){
             steps{
-                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'dev.in', playbook: 'copy.yml'
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'krishna', inventory: 'dev.in', playbook: 'copy.yml'
             }
            
         }
