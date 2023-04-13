@@ -1,8 +1,6 @@
 pipeline{
     agent any
-     tools {
-        maven 'Maven-3.6.1'
-    }
+    
     
     environment{
         PATH = "/opt/maven3/bin:$PATH"
@@ -10,7 +8,7 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'javahome2', url: 'https://github.com/srinicloud87/myweb.git'
+                git credentialsId: 'javahome2', url: 'https://github.com/krishnakanth696/myweb.git'
             }
         }
         stage("Maven Build"){
@@ -31,24 +29,24 @@ pipeline{
                   ], 
                   credentialsId: 'nexus3', 
                   groupId: 'in.javahome', 
-                  nexusUrl: '172.31.32.100:8081', 
+                  nexusUrl: '172.31.32.198:8081', 
                   nexusVersion: 'nexus3', 
                   protocol: 'http', 
-                  repository: 'sample-releases', 
+                  repository: 'test-nexus', 
                   version: '8.2.0'  
               }
             }
         stage('Build Docker Image'){
             steps{
-                 sh 'docker build -t srinidockerhub87/spring-boot-mongo .'
+                 sh 'docker build -t krishnakanth696/spring-boot-mongo .'
              }
          }
         stage('Push Docker Image'){
              steps{
                   withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
-                      sh "docker login -u srinidockerhub87 -p ${DOCKER_HUB_CREDENTIALS}"
+                      sh "docker login -u krishnakanth696 -p ${DOCKER_HUB_CREDENTIALS}"
             }
-            sh 'docker push srinidockerhub87/spring-boot-mongo'
+            sh 'docker push krishnakanth696/spring-boot-mongo'
         }
       }
         stage("Deploy To Kuberates Cluster"){
